@@ -14,4 +14,7 @@ public interface MainService {
 
 	//피드업로드
 	public void uploadFeed(MainDTO dto);
+
+	//showLevel 업데이트
+	public void updateShowLevel(MainDTO dto);
 }

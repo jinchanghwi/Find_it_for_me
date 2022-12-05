@@ -12,39 +12,53 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<form action="/sendAnswer">
 <div style="margin:20px">
 	<img src="/img/mainLogo.png" width="100px" style="float:left;">
 	<div style="float:right;">
 		<div class="input-group">
-			<input type="text" class="form-control" placeholder="정답" id="" name="">
-			<button class="btn btn-info">전송</button>
+			<input type="text" class="form-control" placeholder="정답" id="answer" name="answer">
+			<button type="submit" class="btn btn-info">전송</button>
 			<button class="btn btn-secondary">구글맵</button>
 		</div>
 	</div>
 </div>
+</form>
 <br><br><hr><br>
 <div style="width:600px;text-align:center;margin:0 auto">
-	<table class="table" border="1">
+
 		<c:choose>
 			<c:when test="${!empty list}">
 				<c:forEach items="${list}" var="list" varStatus="status">
-					<tr>
-						<td>${list.feedId}</td>
-					</tr>
-					<tr>
-						<td>
-							<img src="/image/${list.image}">
-						</td>
-					</tr>
+					<table class="table" border="1">
+						<tr>
+							<td style="text-align:left;">
+								<img src="/img/${list.writerId}.png" width="25px">&nbsp;${list.writerId}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="/image/${list.image}" width="300px" style="margin:0 auto;">
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:left;">
+								<b>${list.writerId}</b>
+								<pre><c:out value="${list.text}" /></pre>
+							</td>
+						</tr>
+					</table>
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
-				<tr>
-					<td>등록된 FEED가 없습니다.</td>
-				</tr>
+				<table class="table" border="1">
+					<tr>
+						<td>등록된 FEED가 없습니다.</td>
+					</tr>
+				</table>
 			</c:otherwise>
 		</c:choose>
-	</table>
+
 </div>
 </body>
 </html>

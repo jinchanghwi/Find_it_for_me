@@ -33,6 +33,11 @@ public class MainServiceImpl implements MainService{
 		System.out.println(dto.toString());
 		System.out.println("insert 완료!!");
 	}
+	//showLevel에 해당하는 레코드의 showYN을 Y로 업데이트
+	@Override
+	public void updateShowLevel(MainDTO dto) {
+		mainDao.updateShowLevel(dto);
+	}
 
 
 }

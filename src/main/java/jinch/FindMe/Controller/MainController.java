@@ -29,6 +29,11 @@ public class MainController {
 		return "index";
 	}
 
+	@RequestMapping(value = "/introduction")
+	public String introduction() {
+		return "introduction";
+	}
+
 	@RequestMapping(value="/snsFeedList")
 	public String snsFeedList(MainDTO dto, Model model) {
 		List<MainDTO> list = mainService.selectFeedList(null);
@@ -69,5 +74,28 @@ public class MainController {
 		return "snsFeedUpload";
 	}
 
+	@RequestMapping(value="/sendAnswer")
+	public String sendAnswer(MainDTO dto, Model model) {
+		int showLevel = 0;
+		if("".equals(dto.getAnswer()) || dto.getAnswer() == null) {
+			System.out.println("정답 입력 안함");
+		}else if("진창휘".equals(dto.getAnswer())) {
+			showLevel = 2;
+		}else {
+			System.out.println("정답이 아님");
+		}
 
+		//정답일경우 세팅된 showLevel의 값을 바꿔준다
+		if(showLevel > 0) {
+			dto.setShowLevel(showLevel);
+			mainService.updateShowLevel(dto);
+		}
+
+		List<MainDTO> list = mainService.selectFeedList(null);
+		for(MainDTO data : list) {
+			System.out.println(data.toString());
+		}
+		model.addAttribute("list", list);
+		return "snsFeedList";
+	}
 }

@@ -22,6 +22,7 @@
 			tbl_sns_feed
 		where 1=1
 			and showyn = 'Y'
+		order by showlevel desc,feedid desc
 	</select>
 
 	<insert id="uploadFeed" parameterType="jinch.FindMe.DTO.MainDTO">
@@ -38,9 +39,16 @@
 			,#{writerId}
 			,#{text}
 			,#{image}
-			,'N'
+			,#{showYN}
 			,#{showLevel}
 			,#{answer}
 		)
 	</insert>
+
+	<update id="updateShowLevel" parameterType="jinch.FindMe.DTO.MainDTO">
+		update tbl_sns_feed
+		set
+			showyn = 'Y'
+		where showlevel = #{showLevel}
+	</update>
 </mapper>

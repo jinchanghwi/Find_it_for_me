@@ -16,7 +16,7 @@ $(document).ready(function(){
 			location.href="/snsFeedUpload";
 		}else if(userId == "jinch" && userPw == "1234"){
 			alert("환영합니다.");
-			location.href="/snsFeedList";
+			location.href="/introduction";
 		}else{
 			alert("아이디와 패스워드를 확인해주세요");
 		}
