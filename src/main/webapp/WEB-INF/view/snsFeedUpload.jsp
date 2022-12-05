@@ -38,6 +38,11 @@ $(document).ready(function(){
 			<span class="input-group-text" id="basic-addon1" style="width:100px;">정답</span>
 			<input type="text" class="form-control" style="width:auto;" id="answer" name="answer">
 		</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text" id="basic-addon1" style="width:200px;">화면 노출여부</span>
+			<input type="radio" id="showYN" value="N" checked="checked">N &emsp;
+			<input type="radio" id="showYN" value="Y">Y
+		</div>
 		<div style="text-align:center;">
 			<button type="submit" style="width:300px;" class="btn btn-secondary" id="uploadBtn" name="uploadBtn">업로드</button>
 		</div>
