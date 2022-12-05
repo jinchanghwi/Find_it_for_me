@@ -32,4 +32,9 @@ public class MainController {
 		return "snsFeedList";
 	}
 
+	@RequestMapping(value="/snsFeedUpload")
+	public String snsFeedUpload(MainDTO dto, Model model) {
+		return "snsFeedUpload";
+	}
+
 }
