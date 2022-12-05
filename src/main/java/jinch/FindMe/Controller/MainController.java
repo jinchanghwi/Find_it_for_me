@@ -22,14 +22,14 @@ public class MainController {
 		return "index";
 	}
 
-	@RequestMapping(value="/snsList")
-	public String sns(MainDTO dto, Model model) {
+	@RequestMapping(value="/snsFeedList")
+	public String snsFeedList(MainDTO dto, Model model) {
 		List<MainDTO> list = mainService.selectFeedList(null);
 		for(MainDTO data : list) {
 			System.out.println(data.toString());
 		}
 		model.addAttribute("list", list);
-		return "snsList";
+		return "snsFeedList";
 	}
 
 }
