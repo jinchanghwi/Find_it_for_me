@@ -19,14 +19,16 @@ public class MainServiceImpl implements MainService{
 	public String createFeedId(MainDTO dto) {
 		return mainDao.createFeedId(dto);
 	}
-
+	//피드 리스트를 불러온다
 	@Override
 	public List<MainDTO> selectFeedList(MainDTO dto) {
 		return mainDao.selectFeedList(dto);
 	}
-
+	//피드업로드
 	@Override
 	public void uploadFeed(MainDTO dto) {
+		String feedId = createFeedId(dto);
+		dto.setFeedId(feedId);
 		mainDao.uploadFeed(dto);
 	}
 

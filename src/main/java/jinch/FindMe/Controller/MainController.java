@@ -64,7 +64,7 @@ public class MainController {
 		else {
 			dto.setImage("default.png"); //업로드가 없으면 기본 이미지
 		}
-		//레코드 추가
+		mainService.uploadFeed(dto);//레코드 추가
 		return "snsFeedUpload";
 	}
 
