@@ -11,9 +11,12 @@ $(document).ready(function(){
 		var userId = $("#userId").val();
 		var userPw = $("#userPw").val();
 
-		if(userId == "jinch" && userPw == "1234"){
+		if(userId == "admin" && userPw == "1234"){
+			alert("관리자계정");
+			location.href="/snsFeedUpload";
+		}else if(userId == "jinch" && userPw == "1234"){
 			alert("환영합니다.");
-			location.href="/snsList";
+			location.href="/snsFeedList";
 		}else{
 			alert("아이디와 패스워드를 확인해주세요");
 		}
