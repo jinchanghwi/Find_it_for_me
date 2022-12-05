@@ -23,4 +23,24 @@
 		where 1=1
 			and showyn = 'Y'
 	</select>
+
+	<insert id="uploadFeed" parameterType="jinch.FindMe.DTO.MainDTO">
+		insert into	tbl_sns_feed(
+			 feedid
+			,writerid
+			,text
+			,image
+			,showyn
+			,showlevel
+			,answer
+		)values(
+			 #{feedid}
+			,#{writerid}
+			,#{text}
+			,#{image}
+			,'N'
+			,#{showlevel}
+			,#{answer}
+		)
+	</insert>
 </mapper>

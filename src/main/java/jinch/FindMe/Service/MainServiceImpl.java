@@ -25,5 +25,10 @@ public class MainServiceImpl implements MainService{
 		return mainDao.selectFeedList(dto);
 	}
 
+	@Override
+	public void uploadFeed(MainDTO dto) {
+		mainDao.uploadFeed(dto);
+	}
+
 
 }

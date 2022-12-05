@@ -13,4 +13,7 @@ public interface MainDAO {
 
 	//피드리스트를 가져온다
 	public List<MainDTO> selectFeedList(MainDTO dto);
+
+	//피드업로드
+	public void uploadFeed(MainDTO dto);
 }
