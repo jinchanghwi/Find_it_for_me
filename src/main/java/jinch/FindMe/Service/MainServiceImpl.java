@@ -30,6 +30,8 @@ public class MainServiceImpl implements MainService{
 		String feedId = createFeedId(dto);
 		dto.setFeedId(feedId);
 		mainDao.uploadFeed(dto);
+		System.out.println(dto.toString());
+		System.out.println("insert 완료!!");
 	}
 
 

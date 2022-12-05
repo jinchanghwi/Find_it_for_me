@@ -4,6 +4,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class MainDTO {
 
+	@Override
+	public String toString() {
+		return "MainDTO [feedId=" + feedId + ", writerId=" + writerId + ", text=" + text + ", image=" + image
+				+ ", uploadFile=" + uploadFile + ", showYN=" + showYN + ", showLevel=" + showLevel + ", answer="
+				+ answer + "]";
+	}
+
 	private String feedId; //피드ID
 	private String writerId;	//작성자ID
 	private String text;	//텍스트

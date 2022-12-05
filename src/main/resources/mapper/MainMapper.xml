@@ -34,12 +34,12 @@
 			,showlevel
 			,answer
 		)values(
-			 #{feedid}
-			,#{writerid}
+			 #{feedId}
+			,#{writerId}
 			,#{text}
 			,#{image}
 			,'N'
-			,#{showlevel}
+			,#{showLevel}
 			,#{answer}
 		)
 	</insert>

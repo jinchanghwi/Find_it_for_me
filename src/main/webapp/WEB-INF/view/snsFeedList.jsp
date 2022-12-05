@@ -31,6 +31,11 @@ $(document).ready(function(){
 					<tr>
 						<td>${list.feedId}</td>
 					</tr>
+					<tr>
+						<td>
+							<img src="/image/${list.image}">
+						</td>
+					</tr>
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
