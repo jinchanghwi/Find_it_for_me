@@ -20,35 +20,38 @@ import jinch.FindMe.Service.MainService;
 @Controller
 public class MainController {
 
+	//메인 서비스
 	@Autowired
 	MainService mainService;
 
+	//인덱스
 	@RequestMapping(value = "/")
 	public String index() {
 		System.out.println("index.jsp 이동...");
 		return "index";
 	}
 
+	//인덱스에서 로그인시 가는 설명 페이지
 	@RequestMapping(value = "/introduction")
 	public String introduction() {
 		return "introduction";
 	}
 
+	//설명페이지에서 확인버튼 클릭시 이동하는 페이지
 	@RequestMapping(value="/snsFeedList")
 	public String snsFeedList(MainDTO dto, Model model) {
 		List<MainDTO> list = mainService.selectFeedList(null);
-		for(MainDTO data : list) {
-			System.out.println(data.toString());
-		}
 		model.addAttribute("list", list);
 		return "snsFeedList";
 	}
 
+	//admin 계정으로 로그인 시 피드 업로드 페이지로 이동
 	@RequestMapping(value="/snsFeedUpload")
 	public String snsFeedUpload(MainDTO dto, Model model) {
 		return "snsFeedUpload";
 	}
 
+	//피드 업로드하는 컨트롤
 	@RequestMapping(value="/uploadFeed")
 	public String uploadFeed(MainDTO dto, Model model, HttpServletRequest request) throws Exception {
 		MultipartFile uploadfile = dto.getUploadFile(); // 업로드 받기, vo 객체는 MultipartFile형으로
@@ -69,14 +72,16 @@ public class MainController {
 		else {
 			dto.setImage("default.png"); //업로드가 없으면 기본 이미지
 		}
-		System.out.println(dto.toString());
 		mainService.uploadFeed(dto);//레코드 추가
 		return "snsFeedUpload";
 	}
 
+	//정답입력시 정답을 확인하는 컨트롤
 	@RequestMapping(value="/sendAnswer")
 	public String sendAnswer(MainDTO dto, Model model) {
+		//1번문제는 2, 2번 문제는 3 이런식
 		int showLevel = 0;
+
 		if("".equals(dto.getAnswer()) || dto.getAnswer() == null) {
 			System.out.println("정답 입력 안함");
 		}else if("진창휘".equals(dto.getAnswer())) {
@@ -92,9 +97,6 @@ public class MainController {
 		}
 
 		List<MainDTO> list = mainService.selectFeedList(null);
-		for(MainDTO data : list) {
-			System.out.println(data.toString());
-		}
 		model.addAttribute("list", list);
 		return "snsFeedList";
 	}
