@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common/common.jsp" %>
+<%@ include file="/common/itemWindow.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,17 +41,11 @@ $(document).ready(function(){
 			<input type="text" class="form-control" placeholder="정답" id="answer" name="answer">
 			<button type="button" class="btn btn-info" id="sendBtn" name="sendBtn">전송</button>
 			<button class="btn btn-secondary">구글맵</button>
+			<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">아이템창</button>
 		</div>
 	</div>
 </div>
 <br><br><hr><br>
-<div style="float:left;">
-안<br>
-안<br>
-안<br>
-안<br>
-안<br>
-</div>
 <div style="width:600px;text-align:center;margin:0 auto">
 
 		<c:choose>
@@ -60,7 +55,7 @@ $(document).ready(function(){
 						<tr>
 							<td style="text-align:left;">
 								<input type="hidden" value="${list.feedId}" name="feedId" id="feedId">
-								<img src="/img/${list.writerId}.png" width="25px">&nbsp;${list.writerId}
+								<img class="rounded-circle" src="/img/${list.writerId}.png" width="25px">&nbsp;${list.writerId}
 							</td>
 						</tr>
 						<tr>
