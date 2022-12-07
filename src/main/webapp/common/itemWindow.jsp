@@ -6,9 +6,8 @@
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
   </div>
   <div class="offcanvas-body">
-    <p>Some text lorem ipsum.</p>
-    <p>Some text lorem ipsum.</p>
-    <button class="btn btn-secondary" type="button">A Button</button>
+	<c:forEach items="${itemList}" var="list" varStatus="status">
+	</c:forEach>
   </div>
 </div>
 
