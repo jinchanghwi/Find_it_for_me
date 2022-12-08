@@ -7,6 +7,11 @@
 <title>Find it for me</title>
 <script type="text/javascript">
 $(document).ready(function(){
+
+	$("#uploadBtn").click(function() {
+		location.href = "/snsFeedUpload";
+	});
+
 	$("#sendBtn").click(function() {
 		var map = {};
 		map["answer"] = $("#answer").val();
@@ -39,18 +44,18 @@ $(document).ready(function(){
 		<div class="input-group">
 			<input type="text" class="form-control" placeholder="정답" id="answer" name="answer">
 			<button type="button" class="btn btn-info" id="sendBtn" name="sendBtn">전송</button>
-			<button type="button" id="openModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"> ${grade} </button>
+			<c:if test="${grade eq 'MASTER'}"><button type="button" class="btn btn-info" id="uploadBtn" name="uploadBtn">업로드</button></c:if>
+			<!-- <button type="button" id="openModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">모달</button>  -->
 			<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">아이템창</button>
 		</div>
 	</div>
 </div>
 <br><br><hr><br>
-<div style="width:600px;text-align:center;margin:0 auto">
-
+<div style="width:800px;text-align:center;margin:0 auto">
 		<c:choose>
 			<c:when test="${!empty list}">
 				<c:forEach items="${list}" var="list" varStatus="status">
-					<table class="table" border="1">
+					<table class="table" border="1" style="width:800px;text-align:center;margin:0 auto">
 						<tr>
 							<td style="text-align:left;">
 								<input type="hidden" value="${list.feedId}" name="feedId" id="feedId">
@@ -69,6 +74,7 @@ $(document).ready(function(){
 							</td>
 						</tr>
 					</table>
+					<hr>
 				</c:forEach>
 			</c:when>
 			<c:otherwise>

@@ -5,7 +5,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ include file="/common/itemWindow.jsp" %>
-<%@ include file="/common/modal.jsp" %>
 
 <!DOCTYPE html>
 <html>
