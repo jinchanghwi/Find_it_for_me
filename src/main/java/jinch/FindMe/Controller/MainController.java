@@ -142,7 +142,9 @@ public class MainController {
 	@RequestMapping(value="/answerCheck")
 	public @ResponseBody Map<String,Object> answerCheck(@RequestBody MainDTO dto, HttpServletRequest request) throws Exception{
 		Map<String,Object> result = new HashMap<String,Object>();
-
+		System.out.println(dto.toString());
+		String reqAnswer = dto.getAnswer();
+		MainDTO asDto = null;
 		result.put("resultCode",dto.getAnswer());
 		return result;
 	}

@@ -13,8 +13,13 @@ $(document).ready(function(){
 	});
 
 	$("#sendBtn").click(function() {
+		if($("#answer").val() == ""){
+			alert("정답을 입력해주세요.");
+			return;
+		}
 		var map = {};
 		map["answer"] = $("#answer").val();
+		map["feedId"] = $(".table #firstFeedId").val();
 		var url = "/answerCheck";
 
 		$.ajax({
@@ -25,14 +30,17 @@ $(document).ready(function(){
 			,dataType : "json"
 			,success : function(json){
 				console.log(json.resultCode);
+				if(json.resultCode == "0000"){
+					//정답일때
+				}else{
+					//오답일때
+				}
 			}
 			,error : function(){
 				alert("시스템 관리자에게 문의하세요. [통신 실패]");
 			}
 		});
 	});
-
-	console.log($(".table #firstFeedId").val());
 });
 function deletePrcs(feedId){
 	feedId = lpad(feedId,5,'0');
