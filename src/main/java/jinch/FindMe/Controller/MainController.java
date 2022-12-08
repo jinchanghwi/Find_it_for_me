@@ -145,7 +145,8 @@ public class MainController {
 		System.out.println(dto.toString());
 		String reqAnswer = dto.getAnswer();
 		MainDTO asDto = null;
-		result.put("resultCode",dto.getAnswer());
+		result.put("resultCode","0000"); //정답
+		result.put("resultCode","9999"); //오답
 		return result;
 	}
 }
