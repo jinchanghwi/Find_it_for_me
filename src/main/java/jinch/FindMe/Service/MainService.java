@@ -6,6 +6,9 @@ import jinch.FindMe.DTO.MainDTO;
 
 public interface MainService {
 
+	//로그인
+	public String login(MainDTO dto);
+
 	//피드ID채번
 	public String createFeedId(MainDTO dto);
 

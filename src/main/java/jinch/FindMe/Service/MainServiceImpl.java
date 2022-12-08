@@ -14,6 +14,13 @@ public class MainServiceImpl implements MainService{
 	@Autowired
 	MainDAO mainDao;
 
+
+	//로그인을 확인한다
+	@Override
+	public String login(MainDTO dto) {
+		return mainDao.login(dto);
+	}
+
 	//피드ID를 채번한다
 	@Override
 	public String createFeedId(MainDTO dto) {

@@ -11,14 +11,12 @@ $(document).ready(function(){
 		var userId = $("#userId").val();
 		var userPw = $("#userPw").val();
 
-		if(userId == "admin" && userPw == "1234"){
-			alert("관리자계정");
-			location.href="/snsFeedUpload";
-		}else if(userId == "jinch" && userPw == "1234"){
-			alert("환영합니다.");
-			location.href="/introduction";
-		}else{
+		if(userId == "" && userPw == ""){
 			alert("아이디와 패스워드를 확인해주세요");
+			return;
+		}else{
+			$("#frm").attr("action","/login");
+			$("#frm").submit();
 		}
 	});
 
@@ -37,6 +35,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<form id="frm">
 <div style="width:300px;margin:0 auto;margin-top:100px">
 	<div style="text-align:center;">
 		<img src="/img/mainLogo.png" width="300px">
@@ -53,5 +52,6 @@ $(document).ready(function(){
 		<button type="button" style="width:300px;" class="btn btn-secondary" id="loginBtn" name="loginBtn">Login</button>
 	</div>
 </div>
+</form>
 </body>
 </html>

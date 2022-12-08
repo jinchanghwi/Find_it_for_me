@@ -39,7 +39,7 @@ $(document).ready(function(){
 		<div class="input-group">
 			<input type="text" class="form-control" placeholder="정답" id="answer" name="answer">
 			<button type="button" class="btn btn-info" id="sendBtn" name="sendBtn">전송</button>
-			<button type="button" id="openModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Open modal</button>
+			<button type="button" id="openModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"> ${grade} </button>
 			<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">아이템창</button>
 		</div>
 	</div>

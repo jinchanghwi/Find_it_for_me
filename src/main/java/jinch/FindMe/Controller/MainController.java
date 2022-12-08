@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,33 +35,31 @@ public class MainController {
 
 	//인덱스
 	@RequestMapping(value = "/")
-	public String index() {
-		System.out.println("index.jsp 이동...");
-		return "index";
+	public String index(MainDTO dto, Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String grade = (String) session.getAttribute("grade");
+		if("".equals(grade) || null == grade) {
+			System.out.println("index.jsp 이동...");
+			return "index";
+		}else {
+			System.out.println("snsFeedList.jsp 이동...");
+			return "snsFeedList";
+		}
 	}
 
-	//인덱스에서 로그인시 가는 설명 페이지
-	@RequestMapping(value = "/introduction")
-	public String introduction() {
-		/*
-		DefaultMessageService messageService =  NurigoApp.INSTANCE.initialize("NCSHZQG8PRJUZR1K", "W25B67Q1JFGNFJLJADWX34RL4GEGSRTX", "https://api.solapi.com");
-		// Message 패키지가 중복될 경우 net.nurigo.sdk.message.model.Message로 치환하여 주세요
-		Message message = new Message();
-		message.setFrom("01025954308");
-		message.setTo("01025954308");
-		message.setText("자바");
-
-		try {
-		  // send 메소드로 ArrayList<Message> 객체를 넣어도 동작합니다!
-		  messageService.send(message);
-		} catch (NurigoMessageNotReceivedException exception) {
-		  // 발송에 실패한 메시지 목록을 확인할 수 있습니다!
-		  System.out.println(exception.getFailedMessageList());
-		  System.out.println(exception.getMessage());
-		} catch (Exception exception) {
-		  System.out.println(exception.getMessage());
-		}*/
-		return "introduction";
+	//인덱스
+	@RequestMapping(value = "/login")
+	public String login(MainDTO dto, Model model, HttpServletRequest request) {
+		String grade = mainService.login(dto);
+		if(null == grade || "".equals(grade)) {
+			//로그인정보 없음
+			return "index";
+		}else{
+			//로그인정보 있으면 패스
+			HttpSession session = request.getSession();
+			session.setAttribute("grade", grade); // 세션 설정
+			return "introduction";
+		}
 	}
 
 	//설명페이지에서 확인버튼 클릭시 이동하는 페이지
@@ -73,8 +72,14 @@ public class MainController {
 
 	//admin 계정으로 로그인 시 피드 업로드 페이지로 이동
 	@RequestMapping(value="/snsFeedUpload")
-	public String snsFeedUpload(MainDTO dto, Model model) {
-		return "snsFeedUpload";
+	public String snsFeedUpload(MainDTO dto, Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if("MASTER".equals((String)session.getAttribute("grade"))) {
+			return "snsFeedUpload";
+		}else {
+			return "snsFeedList";
+		}
+
 	}
 
 	//피드 업로드하는 컨트롤
@@ -99,7 +104,7 @@ public class MainController {
 			dto.setImage("default.png"); //업로드가 없으면 기본 이미지
 		}
 		mainService.uploadFeed(dto);//레코드 추가
-		return "snsFeedUpload";
+		return "snsFeedList";
 	}
 
 	//정답입력시 정답을 확인하는 컨트롤
