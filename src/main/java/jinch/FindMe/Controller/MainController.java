@@ -107,6 +107,13 @@ public class MainController {
 		return "snsFeedList";
 	}
 
+	//인덱스
+	@RequestMapping(value = "/deleteFeed")
+	public String deleteFeed(MainDTO dto, Model model, HttpServletRequest request) {
+		mainService.deleteFeed(dto);
+		return "snsFeedList";
+	}
+
 	//정답입력시 정답을 확인하는 컨트롤
 	@RequestMapping(value="/sendAnswer")
 	public String sendAnswer(MainDTO dto, Model model) {

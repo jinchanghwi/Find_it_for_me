@@ -46,5 +46,11 @@ public class MainServiceImpl implements MainService{
 		mainDao.updateShowLevel(dto);
 	}
 
+	@Override
+	public void deleteFeed(MainDTO dto) {
+		mainDao.deleteFeed(dto);
+
+	}
+
 
 }

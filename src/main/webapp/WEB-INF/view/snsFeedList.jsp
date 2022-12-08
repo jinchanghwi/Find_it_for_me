@@ -32,14 +32,20 @@ $(document).ready(function(){
 		});
 	});
 
-	console.log($(".table #feedId").val());
+	console.log($(".table #firstFeedId").val());
 });
 function deletePrcs(feedId){
-	console.log(lpad(feedId,5,'0'));
+	feedId = lpad(feedId,5,'0');
+	$("#feedId").val(feedId);
+	$("#frm").attr("action","/deleteFeed");
+	$("#frm").submit();
 }
 </script>
 </head>
 <body>
+<form id="frm">
+	<input type="hidden" id="feedId" name="feedId" value="">
+</form>
 <div style="margin:20px">
 	<img src="/img/mainLogo.png" width="100px" style="float:left;">
 	<div style="float:right;">
@@ -62,7 +68,7 @@ function deletePrcs(feedId){
 					<table class="table" border="1" style="width:800px;text-align:center;margin:0 auto">
 						<tr>
 							<td style="text-align:left;">
-								<input type="hidden" value="${list.feedId}" name="feedId" id="feedId">
+								<input type="hidden" value="${list.feedId}" name="firstFeedId" id="firstFeedId">
 								<img class="rounded-circle" src="/img/${list.writerId}.png" width="25px">&nbsp;${list.writerId}
 							</td>
 						</tr>

@@ -61,4 +61,11 @@
 			showyn = 'Y'
 		where showlevel = #{showLevel}
 	</update>
+
+	<delete id="deleteFeed" parameterType="jinch.FindMe.DTO.MainDTO">
+		delete from
+			tbl_sns_feed
+		where 1=1
+			and feedId = #{feedId}
+	</delete>
 </mapper>

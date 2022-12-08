@@ -23,4 +23,7 @@ public interface MainDAO {
 
 	//showLevel 업데이트
 	public void updateShowLevel(MainDTO dto);
+
+	//피드 삭제
+	public void deleteFeed(MainDTO dto);
 }
