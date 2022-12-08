@@ -19,16 +19,8 @@
 <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#myModal").show();
-	$("#modalBody").text("모달입니다.");
-	$("#modalCloseBtn").click(function() {
-		console.log("모달닫기버튼 클릭")
-	});
 
 });
-function comMsg(text){
-	$("#modalBody").text("모달입니다.");
-}
 function setImageFromFile(input, expression) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

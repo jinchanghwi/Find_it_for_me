@@ -20,6 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jinch.FindMe.DTO.MainDTO;
 import jinch.FindMe.Service.MainService;
+import net.nurigo.sdk.NurigoApp;
+import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
+import net.nurigo.sdk.message.model.Message;
+import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @Controller
 public class MainController {
@@ -38,6 +42,24 @@ public class MainController {
 	//인덱스에서 로그인시 가는 설명 페이지
 	@RequestMapping(value = "/introduction")
 	public String introduction() {
+		/*
+		DefaultMessageService messageService =  NurigoApp.INSTANCE.initialize("NCSHZQG8PRJUZR1K", "W25B67Q1JFGNFJLJADWX34RL4GEGSRTX", "https://api.solapi.com");
+		// Message 패키지가 중복될 경우 net.nurigo.sdk.message.model.Message로 치환하여 주세요
+		Message message = new Message();
+		message.setFrom("01025954308");
+		message.setTo("01025954308");
+		message.setText("자바");
+
+		try {
+		  // send 메소드로 ArrayList<Message> 객체를 넣어도 동작합니다!
+		  messageService.send(message);
+		} catch (NurigoMessageNotReceivedException exception) {
+		  // 발송에 실패한 메시지 목록을 확인할 수 있습니다!
+		  System.out.println(exception.getFailedMessageList());
+		  System.out.println(exception.getMessage());
+		} catch (Exception exception) {
+		  System.out.println(exception.getMessage());
+		}*/
 		return "introduction";
 	}
 
