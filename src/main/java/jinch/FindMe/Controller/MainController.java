@@ -50,7 +50,7 @@ public class MainController {
 			return "index";
 		}else {
 			System.out.println("snsFeedList.jsp 이동...");
-			return "snsFeedList";
+			return "redirect:/snsFeedList";
 		}
 	}
 
@@ -105,7 +105,7 @@ public class MainController {
 		if("MASTER".equals((String)session.getAttribute("grade"))) {
 			return "snsFeedUpload";
 		}else {
-			return "snsFeedList";
+			return "redirect:/snsFeedList";
 		}
 	}
 
@@ -153,7 +153,17 @@ public class MainController {
 	 */
 	@RequestMapping(value = "/deleteFeed")
 	public String deleteFeed(MainDTO dto, Model model, HttpServletRequest request) {
+
+		MainDTO asDto = mainService.selectFeed(dto);
+
+		String path = request.getSession().getServletContext().getRealPath("/image/"); // 경로
+		File delfile = new File(path + asDto.getImage()); // 삭제할 파일 지정
+		if(delfile.exists()) {
+			delfile.delete(); // 파일삭제
+		}
+
 		mainService.deleteFeed(dto);
+
 		return "redirect:/snsFeedList";
 	}
 

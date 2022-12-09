@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jinch.FindMe.Mapper.MainDAO">
 
+	<!-- ================================================== -->
+	<!-- SQLID : login                                      -->
+	<!-- DESC  : 유저ID와 PW로 로그인정보를 가져온다        -->
+	<!-- ================================================== -->
 	<select id="login" parameterType="jinch.FindMe.DTO.MainDTO" resultType="java.lang.String">
 		select
 			grade
@@ -12,6 +16,10 @@
 			and userPw = #{userPw}
 	</select>
 
+	<!-- ================================================== -->
+	<!-- SQLID : createFeedId                               -->
+	<!-- DESC  : 피드ID를 채번한다                          -->
+	<!-- ================================================== -->
 	<select id="createFeedId" resultType="java.lang.String">
 		select
 			lpad(coalesce(max(feedid),'0')+1,5,'0') as feedid
@@ -19,10 +27,18 @@
 			tbl_sns_feed
 	</select>
 
+	<!-- ================================================== -->
+	<!-- SQLID : createShowLevel                            -->
+	<!-- DESC  : 쇼레벨을 채번한다                          -->
+	<!-- ================================================== -->
 	<select id="createShowLevel" resultType="int">
 		select coalesce(max(showlevel),0)+1 as showlevel from tbl_sns_feed
 	</select>
 
+	<!-- ================================================== -->
+	<!-- SQLID : selectFeed                                 -->
+	<!-- DESC  : 피드ID로 하나의 피드정보를 가져온다        -->
+	<!-- ================================================== -->
 	<select id="selectFeed" parameterType="jinch.FindMe.DTO.MainDTO" resultType="jinch.FindMe.DTO.MainDTO">
 		select
 			*
@@ -32,6 +48,10 @@
 			and feedId = #{feedId}
 	</select>
 
+	<!-- ================================================== -->
+	<!-- SQLID : selectFeedList                             -->
+	<!-- DESC  : 전체 피드중에서 showYN이 Y인것만 가져온다  -->
+	<!-- ================================================== -->
 	<select id="selectFeedList" resultType="jinch.FindMe.DTO.MainDTO">
 		select
 			 feedid
@@ -48,6 +68,10 @@
 		order by showlevel desc,feedid desc
 	</select>
 
+	<!-- ================================================== -->
+	<!-- SQLID : uploadFeed                                 -->
+	<!-- DESC  : 신규 피드를 등록한다                       -->
+	<!-- ================================================== -->
 	<insert id="uploadFeed" parameterType="jinch.FindMe.DTO.MainDTO">
 		insert into	tbl_sns_feed(
 			 feedid
@@ -68,6 +92,10 @@
 		)
 	</insert>
 
+	<!-- ================================================== -->
+	<!-- SQLID : updateShowLevel                            -->
+	<!-- DESC  : 해당 showLevel을 화면에 보여준다           -->
+	<!-- ================================================== -->
 	<update id="updateShowLevel" parameterType="jinch.FindMe.DTO.MainDTO">
 		update tbl_sns_feed
 		set
@@ -75,10 +103,15 @@
 		where showlevel = #{showLevel}
 	</update>
 
+	<!-- ================================================== -->
+	<!-- SQLID : deleteFeed                                 -->
+	<!-- DESC  : 해당 피드를 영구히 지운다                  -->
+	<!-- ================================================== -->
 	<delete id="deleteFeed" parameterType="jinch.FindMe.DTO.MainDTO">
 		delete from
 			tbl_sns_feed
 		where 1=1
 			and feedId = #{feedId}
 	</delete>
+
 </mapper>
