@@ -154,7 +154,7 @@ public class MainController {
 	@RequestMapping(value = "/deleteFeed")
 	public String deleteFeed(MainDTO dto, Model model, HttpServletRequest request) {
 		mainService.deleteFeed(dto);
-		return "snsFeedList";
+		return "redirect:/snsFeedList";
 	}
 
 	/**
