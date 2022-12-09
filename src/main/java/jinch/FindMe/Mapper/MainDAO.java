@@ -15,6 +15,12 @@ public interface MainDAO {
 	//피드ID채번
 	public String createFeedId(MainDTO dto);
 
+	//쇼레벨 채번
+	public int createShowLevel(MainDTO dto);
+
+	//피드하나를 가져온다
+	public MainDTO selectFeed(MainDTO dto);
+
 	//피드리스트를 가져온다
 	public List<MainDTO> selectFeedList(MainDTO dto);
 

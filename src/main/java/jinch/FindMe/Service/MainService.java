@@ -9,8 +9,8 @@ public interface MainService {
 	//로그인
 	public String login(MainDTO dto);
 
-	//피드ID채번
-	public String createFeedId(MainDTO dto);
+	//피드하나를 가져온다
+	public MainDTO selectFeed(MainDTO dto);
 
 	//피드리스트를 가져온다
 	public List<MainDTO> selectFeedList(MainDTO dto);

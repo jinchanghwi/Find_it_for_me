@@ -32,8 +32,14 @@ $(document).ready(function(){
 				console.log(json.resultCode);
 				if(json.resultCode == "0000"){
 					//정답일때
-				}else{
+					alert(json.resultMsg);
+					location.reload();
+				}else if(json.resultCode == "9999"){
 					//오답일때
+					alert("휘창이가 원하는 답은 그게 아닙니다..");
+				}else{
+					//코드 이상
+					alert("시스템 관리자에게 문의하세요. [코드값 없음]");
 				}
 			}
 			,error : function(){

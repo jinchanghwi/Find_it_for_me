@@ -33,7 +33,14 @@ public class MainController {
 	@Autowired
 	MainService mainService;
 
-	//인덱스
+	/**
+	 * <pre>
+	 * @URL /
+	 * @DESC 인덱스(로그인) 페이지로 이동한다
+	 * 세션에 값이 있으면 로그인 된 것이니 피드리스트를 불러오고
+	 * 세션에 값이 없으면 로그인하지 않았으니 로그인 페이지로 이동한다
+	 * </pre>
+	 */
 	@RequestMapping(value = "/")
 	public String index(MainDTO dto, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -47,7 +54,14 @@ public class MainController {
 		}
 	}
 
-	//인덱스
+	/**
+	 * <pre>
+	 * @URL /login
+	 * @DESC 로그인
+	 * 화면에서 ID와 PW를 받아와 DB조회 후 값이 없으면 로그인 실패이며 로그인페이지로 이동한다
+	 * 반대로 값이 있으면 세션에 해당유저의 등급을 등록하고 소개페이지로 이동한다
+	 * </pre>
+	 */
 	@RequestMapping(value = "/login")
 	public String login(MainDTO dto, Model model, HttpServletRequest request) {
 		String grade = mainService.login(dto);
@@ -63,6 +77,13 @@ public class MainController {
 	}
 
 	//설명페이지에서 확인버튼 클릭시 이동하는 페이지
+	/**
+	 * <pre>
+	 * @URL /snsFeedList
+	 * @DESC 소개페이지에서 피드리스트로 이동
+	 * 소개페이지에서 확인 버튼을 누르면 피드리스트로 이동한다
+	 * </pre>
+	 */
 	@RequestMapping(value="/snsFeedList")
 	public String snsFeedList(MainDTO dto, Model model) {
 		List<MainDTO> list = mainService.selectFeedList(null);
@@ -70,7 +91,14 @@ public class MainController {
 		return "snsFeedList";
 	}
 
-	//admin 계정으로 로그인 시 피드 업로드 페이지로 이동
+	/**
+	 * <pre>
+	 * @URL /snsFeedUpload
+	 * @DESC MASTER 피드 업로드
+	 * MASTER 권한을 가진자가 피드리스트에서 업로드 버튼을 누르면 이동하는 페이지로
+	 * 새롭게 피드를 업로드 할 수 있다
+	 * </pre>
+	 */
 	@RequestMapping(value="/snsFeedUpload")
 	public String snsFeedUpload(MainDTO dto, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -79,10 +107,18 @@ public class MainController {
 		}else {
 			return "snsFeedList";
 		}
-
 	}
 
 	//피드 업로드하는 컨트롤
+	/**
+	 * <pre>
+	 * @URL /uploadFeed
+	 * @DESC 피드업로드(INSERT)
+	 * MASTER 권한자가 피드 내용을 입력 후 업로드하면
+	 * 파일업로드와 함께 각종 피드의 내용이 업로드 된다
+	 * 이때 피드ID와 쇼레벨은 업로드과정에서 채번된다
+	 * </pre>
+	 */
 	@RequestMapping(value="/uploadFeed")
 	public String uploadFeed(MainDTO dto, Model model, HttpServletRequest request) throws Exception {
 		MultipartFile uploadfile = dto.getUploadFile(); // 업로드 받기, vo 객체는 MultipartFile형으로
@@ -104,49 +140,55 @@ public class MainController {
 			dto.setImage("default.png"); //업로드가 없으면 기본 이미지
 		}
 		mainService.uploadFeed(dto);//레코드 추가
-		return "snsFeedList";
+		return "redirect:/snsFeedList";
 	}
 
 	//인덱스
+	/**
+	 * <pre>
+	 * @URL /deleteFeed
+	 * @DESC 피드를 삭제한다
+	 * 화면에서 MASTER권한자가 삭제 버튼을 누르면 해당 피드ID를 가져와 DB에서 삭제한다
+	 * </pre>
+	 */
 	@RequestMapping(value = "/deleteFeed")
 	public String deleteFeed(MainDTO dto, Model model, HttpServletRequest request) {
 		mainService.deleteFeed(dto);
 		return "snsFeedList";
 	}
 
-	//정답입력시 정답을 확인하는 컨트롤
-	@RequestMapping(value="/sendAnswer")
-	public String sendAnswer(MainDTO dto, Model model) {
-		//1번문제는 2, 2번 문제는 3 이런식
-		int showLevel = 0;
-
-		if("".equals(dto.getAnswer()) || dto.getAnswer() == null) {
-			System.out.println("정답 입력 안함");
-		}else if("진창휘".equals(dto.getAnswer())) {
-			showLevel = 2;
-		}else {
-			System.out.println("정답이 아님");
-		}
-
-		//정답일경우 세팅된 showLevel의 값을 바꿔준다
-		if(showLevel > 0) {
-			dto.setShowLevel(showLevel);
-			mainService.updateShowLevel(dto);
-		}
-
-		List<MainDTO> list = mainService.selectFeedList(null);
-		model.addAttribute("list", list);
-		return "snsFeedList";
-	}
-
+	/**
+	 * <pre>
+	 * @URL /answerCheck
+	 * @DESC 정답체크
+	 * 화면에서 최상단의 피드ID와 사용자가 입력한 정답을 받아
+	 * 피드ID로 DB에서 세팅된 정답을 확인하고
+	 * 사용자가 입력한 정답과 일치하면 0000코드를 던져준다
+	 * 오답일 경우 9999코드를 던져준다
+	 * </pre>
+	 */
 	@RequestMapping(value="/answerCheck")
 	public @ResponseBody Map<String,Object> answerCheck(@RequestBody MainDTO dto, HttpServletRequest request) throws Exception{
 		Map<String,Object> result = new HashMap<String,Object>();
 		System.out.println(dto.toString());
-		String reqAnswer = dto.getAnswer();
-		MainDTO asDto = null;
-		result.put("resultCode","0000"); //정답
-		result.put("resultCode","9999"); //오답
+		String reqAnswer = nvl(dto.getAnswer());
+		MainDTO asDto = mainService.selectFeed(dto);
+		String answer = nvl(asDto.getAnswer());
+		if(reqAnswer.equals(answer)) {
+			result.put("resultCode","0000"); //정답
+			result.put("resultMsg","정답이라요"); //정답
+			asDto.setShowLevel(asDto.getShowLevel()+1);
+			mainService.updateShowLevel(asDto);
+		}else {
+			result.put("resultCode","9999"); //오답
+		}
 		return result;
+	}
+
+	public String nvl(String str) {
+		if(str == null) {
+			str = "";
+		}
+		return str;
 	}
 }

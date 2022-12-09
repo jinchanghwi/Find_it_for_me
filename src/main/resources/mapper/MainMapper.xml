@@ -19,6 +19,19 @@
 			tbl_sns_feed
 	</select>
 
+	<select id="createShowLevel" resultType="int">
+		select coalesce(max(showlevel),0)+1 as showlevel from tbl_sns_feed
+	</select>
+
+	<select id="selectFeed" parameterType="jinch.FindMe.DTO.MainDTO" resultType="jinch.FindMe.DTO.MainDTO">
+		select
+			*
+		from
+			tbl_sns_feed
+		where 1=1
+			and feedId = #{feedId}
+	</select>
+
 	<select id="selectFeedList" resultType="jinch.FindMe.DTO.MainDTO">
 		select
 			 feedid
