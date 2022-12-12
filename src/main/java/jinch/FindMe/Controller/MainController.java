@@ -76,7 +76,6 @@ public class MainController {
 		}
 	}
 
-	//설명페이지에서 확인버튼 클릭시 이동하는 페이지
 	/**
 	 * <pre>
 	 * @URL /snsFeedList
@@ -109,7 +108,6 @@ public class MainController {
 		}
 	}
 
-	//피드 업로드하는 컨트롤
 	/**
 	 * <pre>
 	 * @URL /uploadFeed
@@ -143,7 +141,6 @@ public class MainController {
 		return "redirect:/snsFeedList";
 	}
 
-	//인덱스
 	/**
 	 * <pre>
 	 * @URL /deleteFeed
